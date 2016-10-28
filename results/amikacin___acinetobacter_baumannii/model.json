@@ -1,1 +1,0 @@
-{"rules": ["Presence(AAAAGCGACAATTTTTCCATCTGGCTGCTCA)", "Presence(ATCAGAAAAAGTACTAACCTGTGCATCCGCT)"], "rule_annotations": [{}, {}], "type": "disjunction", "n_rules": 2, "rule_importances": [0.9010989010989011, 0.26373626373626374]}
