@@ -257,7 +257,7 @@
             // Generate the HMTL for each rule
             rule_html = []
             $.each(model_data.rules, function (idx, rule){
-                rule_importance = model_data.rule_importances[idx];
+                rule_importance = model_data.rule_importances[idx].toString().slice(0, 5);
                 rule_annotation = model_data.rule_annotations[idx];
                 if ('product' in rule_annotation){
                     rule_annotation = 'Product: ' + rule_annotation.product + '<br /><br />PATRIC ID: ' + rule_annotation.patric_id;
