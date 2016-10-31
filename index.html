@@ -65,42 +65,48 @@
 
 
     <div class="container">
-    <h1>PATRIC Database</h1>
-    <h5>Last update: 2016/10/27</h5>
+        <h1>PATRIC Database</h1>
+        <h5>Last update: 2016/10/27</h5>
 
-    <p>This page shows the latest results obtained by applying Kover to the entire PATRIC database.</p>
+        <p>This page shows the latest results obtained by applying Kover to the entire PATRIC database.</p>
 
-    <p>All reported metrics were computed on an independent testing set that was not used to learn the model.</p>
+        <p>All reported metrics were computed on an independent testing set that was not used to learn the model.</p>
 
-    <table id="table"
-                 data-toggle="table"
-                 data-filter-control="true"
-                 data-filter-show-clear="true"
-                 data-striped="true"
-                 data-sort-name="species"
-                 data-url="results/summary.json"
-                 data-show-multi-sort="true"
-                 data-sort-priority='[{"sortName": "species","sortOrder":"asc"},{"sortName":"antibiotic","sortOrder":"asc"}]'
-                 data-show-columns="false"
-                 data-pagination="true"
-                 data-page-size="10">
-        <thead>
-            <tr>
-                <th colspan="3" class="text-center th-dataset">Data</th>
-                <th colspan="3" class="text-center th-metrics">Metrics (Average - 10 repetitions)</th>
-                <th colspan="1" class="text-center th-details">Details</th>
-            </tr>
-            <tr>
-                <th data-field="species" data-filter-control="select" data-sortable="true" data-halign="center">Species</th>
-                <th data-field="antibiotic" data-filter-control="select" data-sortable="true" data-halign="center">Antibiotic</th>
-                <th data-field="ds_n_examples" data-sortable="true" data-halign="center" data-align="center" data-formatter="formatInt">Genomes</th>
-                <th data-field="risk" data-sortable="true" data-halign="center" data-align="center">Error Rate</th>
-                <th data-field="sensitivity" data-sortable="true" data-halign="center" data-align="center">Sensitivity</th>
-                <th data-field="specificity" data-sortable="true" data-halign="center" data-align="center">Specificity</th>
-                <th data-field="ds_full_name" data-formatter="create_model_view_buttons" data-halign="center" data-align="center"></th>
-            </tr>
-        </thead>
-    </table>
+        <table id="table"
+                     data-toggle="table"
+                     data-filter-control="true"
+                     data-filter-show-clear="true"
+                     data-striped="true"
+                     data-sort-name="species"
+                     data-url="results/summary.json"
+                     data-show-multi-sort="true"
+                     data-sort-priority='[{"sortName": "species","sortOrder":"asc"},{"sortName":"antibiotic","sortOrder":"asc"}]'
+                     data-show-columns="false"
+                     data-pagination="true"
+                     data-page-size="10">
+            <thead>
+                <tr>
+                    <th colspan="3" class="text-center th-dataset">Data</th>
+                    <th colspan="3" class="text-center th-metrics">Metrics (Average - 10 repetitions)</th>
+                    <th colspan="1" class="text-center th-details">Details</th>
+                </tr>
+                <tr>
+                    <th data-field="species" data-filter-control="select" data-sortable="true" data-halign="center">Species</th>
+                    <th data-field="antibiotic" data-filter-control="select" data-sortable="true" data-halign="center">Antibiotic</th>
+                    <th data-field="ds_n_examples" data-sortable="true" data-halign="center" data-align="center" data-formatter="formatInt">Genomes</th>
+                    <th data-field="risk" data-sortable="true" data-halign="center" data-align="center">Error Rate</th>
+                    <th data-field="sensitivity" data-sortable="true" data-halign="center" data-align="center">Sensitivity</th>
+                    <th data-field="specificity" data-sortable="true" data-halign="center" data-align="center">Specificity</th>
+                    <th data-field="ds_full_name" data-formatter="create_model_view_buttons" data-halign="center" data-align="center"></th>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="row">
+            <div class="col-sm-1">
+                <img src="./images/patric_results.png" class="img-responsive" />
+            </div>
+        </div>
     </div>
 
     <div class="footer">
@@ -112,12 +118,6 @@
                     <a href="./published.pdf" target="_blank"><span class="glyphicon glyphicon-link"></span></a>
                 </div>
                 <div class="col-sm-4"></div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-1">
-                    <img src="./images/patric_results.png" class="img-responsive" />
-                </div>
             </div>
         </div>
 
