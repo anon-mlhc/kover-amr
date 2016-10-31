@@ -9,16 +9,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Kover - AMR Platform</title>
-
-    <!-- Custom CSS -->
-    <link href="css/custom.css" rel="stylesheet">
+    <title>Kover - Detailed Results</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap-table Core CSS -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,7 +59,7 @@
                         <a href="#">Contact</a>
                     </li>
                     <li>
-                        <a href="https://github.com/anon-mlhc/kover/">GitHub</a>
+                        <a href="https://github.com/aldro61/kover">GitHub</a>
                     </li>
                 </ul>
             </div>
@@ -65,58 +70,134 @@
 
 
     <div class="container">
-        <h1>PATRIC Database</h1>
-        <h5>Last update: 2016/10/27</h5>
 
-        <p>This page shows the latest results obtained by applying Kover to the entire PATRIC database.</p>
-
-        <p>All reported metrics were computed on an independent testing set that was not used to learn the model.</p>
-
-        <table id="table"
-                     data-toggle="table"
-                     data-filter-control="true"
-                     data-filter-show-clear="true"
-                     data-striped="true"
-                     data-sort-name="species"
-                     data-url="results/summary.json"
-                     data-show-multi-sort="true"
-                     data-sort-priority='[{"sortName": "species","sortOrder":"asc"},{"sortName":"antibiotic","sortOrder":"asc"}]'
-                     data-show-columns="false"
-                     data-pagination="true"
-                     data-page-size="10">
-            <thead>
-                <tr>
-                    <th colspan="3" class="text-center th-dataset">Data</th>
-                    <th colspan="3" class="text-center th-metrics">Metrics (Average - 10 repetitions)</th>
-                    <th colspan="1" class="text-center th-details">Details</th>
-                </tr>
-                <tr>
-                    <th data-field="species" data-filter-control="select" data-sortable="true" data-halign="center">Species</th>
-                    <th data-field="antibiotic" data-filter-control="select" data-sortable="true" data-halign="center">Antibiotic</th>
-                    <th data-field="ds_n_examples" data-sortable="true" data-halign="center" data-align="center" data-formatter="formatInt">Genomes</th>
-                    <th data-field="risk" data-sortable="true" data-halign="center" data-align="center">Error Rate</th>
-                    <th data-field="sensitivity" data-sortable="true" data-halign="center" data-align="center">Sensitivity</th>
-                    <th data-field="specificity" data-sortable="true" data-halign="center" data-align="center">Specificity</th>
-                    <th data-field="ds_full_name" data-formatter="create_model_view_buttons" data-halign="center" data-align="center"></th>
-                </tr>
-            </thead>
-        </table>
-
-    </div>
-
-    <div class="footer">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-1 text-left">
-                    Anon et al. (2016). Predictive computational phenotyping and biomarker discovery using reference-free genome comparisons. BMC Genomics, 17(1), 754.
-                    <a href="./published.pdf" target="_blank"><span class="glyphicon glyphicon-link"></span></a>
-                </div>
-                <div class="col-sm-4"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                 <h1>Detailed Results</h1>
+                <div>
+                    <a href="index.html"><-- Back to results summary</a>
+                <div>
             </div>
         </div>
 
+        <div class="row" style="margin-top: 1%">
+            <div id="dataset_info" class="col-sm-12">
+                <div><strong>Species: </strong><span id="species_name_1" style="font-style: italic; text-transform: capitalize"></span> <span id="species_name_2" style="font-style: italic; text-transform: lowercase"></span></div>
+                <div><strong>Antibiotic: </strong><span id="antibiotic_name" style="text-transform: capitalize"></span></div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 1%">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#" data-toggle="collapse" data-target="#collapse-overview-body">Overview</a>&nbsp;
+                        </h4>
+                    </div>
+                    <div id="collapse-overview-body" class="panel-collapse collapse in">
+                        <div id="overview_body" class="panel-body">
+                            <table id="table_overview">
+                                <thead>
+                                    <tr>
+                                        <th data-field="ds_n_genomes" data-halign="center" data-align="center">Genomes</th>
+                                        <th data-field="ds_n_res" data-halign="center" data-align="center">Resistant</th>
+                                        <th data-field="ds_n_sus" data-halign="center" data-align="center">Susceptible</th>
+                                        <th data-field="ds_n_kmers" data-halign="center" data-align="center" data-formatter="formatInt">k-mers</th>
+                                        <th data-field="mean_risk" data-halign="center" data-align="center">Error rate*</th>
+                                        <th data-field="mean_sensitivity" data-halign="center" data-align="center">Sensitivity*</th>
+                                        <th data-field="mean_specificity" data-halign="center" data-align="center">Specificity*</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            * Mean over all experiment repeats
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 1%">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#0" data-toggle="collapse" data-target="#collapse-model-body">Model</a>&nbsp;
+                            <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?FORMAT_OBJECT=Alignment&FORMAT_TYPE=HTML&GET_SEQUENCE=on&NCBI_GI=on&NEW_FORMATTER=on&PROGRAM=blastn&QUERY=>rule1%20presence%0AAAAAGCGACAATTTTTCCATCTGGCTGCTCA&ENTREZ_QUERY=Acinetobacter%20baumannii&5Borgn%5D&DATABASE=nt&SHOW_LINKOUT=on&CMD=Web" target="_blank" class="label label-warning">blastn</a>&nbsp;
+                            <a href="#" id="model_fasta" class="label label-danger">fasta</a>
+                            <small>(click rules for annotations)</small>
+                        </h4>
+                    </div>
+                    <div id="collapse-model-body" class="panel-collapse collapse in">
+                        <div id="model_body" class="panel-body">
+                            <div class="container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#0" data-toggle="collapse" data-target="#collapse-repeats-body">Repeats</a>
+                        </h4>
+                    </div>
+                    <div id="collapse-repeats-body" class="panel-collapse collapse in">
+                        <div class="panel-body">
+
+                            <table id="table_repeats" class="table-responsive"
+                                         data-toggle="table"
+                                         data-striped="true"
+                                         data-sort-name="repeat_id">
+                                <thead>
+                                    <tr>
+                                        <th colspan="1" class="text-center">Repeat</th>
+                                        <th colspan="2" class="text-center">Data</th>
+                                        <th colspan="5" class="text-center">Metrics</th>
+                                    </tr>
+                                    <tr>
+                                        <th data-field="repeat_id" data-halign="center" data-align="center" data-formatter="formatInt">#</th>
+                                        <th data-field="ds_n_train_examples" data-halign="center" data-align="center" data-formatter="formatInt">
+                                            Train&nbsp;
+                                            <span class="glyphicon glyphicon-question-sign"
+                                                  data-toggle="tooltip"
+                                                  tabindex="0" title="Number of genomes used to learn the model">
+                                            </span>                                                        </th>
+                                        <th data-field="ds_n_test_examples" data-halign="center" data-align="center" data-formatter="formatInt">
+                                            Test&nbsp;
+                                            <span class="glyphicon glyphicon-question-sign"
+                                                  data-toggle="tooltip"
+                                                  tabindex="0" title="Number of genomes used to evaluate the model">
+                                            </span>
+                                        </th>
+                                        <th data-field="risk" data-halign="center" data-align="center">Error Rate</th>
+                                        <th data-field="sensitivity" data-halign="center" data-align="center">Sensitivity</th>
+                                        <th data-field="specificity" data-halign="center" data-align="center">Specificity</th>
+                                        <th data-field="f1_score" data-halign="center" data-align="center">F1 Score</th>
+                                        <th data-field="n_rules" data-halign="center" data-align="center" data-formatter="formatInt">
+                                            Rules&nbsp;
+                                            <span class="glyphicon glyphicon-question-sign"
+                                                  data-toggle="tooltip"
+                                                  tabindex="0" title="Number of k-mer rules (presence/absence) in the model">
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <footer class="footer">
+
+    </footer>
 
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
@@ -130,11 +211,29 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
 
     <script>
-        var th_dataset_colspan = $('.th-dataset').prop('colspan');
-        var th_metrics_colspan = $('.th-metrics').prop('colspan');
-        var th_details_colspan = $('.th-details').prop('colspan');
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
 
-        function formatInt(val)
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+
+        var initialize_tooltips = function initialize_tooltips(){
+            // Initialize all tooltips
+            $(function () {
+              $('[data-toggle="tooltip"]').tooltip();
+            })
+        }
+
+        var formatInt = function formatInt(val)
         {
             val = val.toString()
             var rgx = /(\d+)(\d{3})/;
@@ -144,69 +243,82 @@
             return val;
         }
 
-        create_model_view_buttons = function(ds_name){
-            return "<a href='details.html?ds=" + ds_name + "' class='btn btn-primary btn-xs'> View </a>";
+        var get_dataset_info = function () {
+            /* TODO: need to support multiple species */
+            ds_info = {}
+            ds_info["name"] = getUrlParameter("ds");
+            ds_info["antibiotic"] = ds_info["name"].split("___")[0];
+            species = ds_info["name"].split("___")[1];
+            ds_info["species"] = species.split("_")[0] + " " + species.split("_")[1];
+            return ds_info;
         }
 
-        // TODO: THIS IS USED TO ADJUST THE COLSPAN OF THE FIRST ROW OF HEADERS. IT DOESNT WORK PROPERLY.
-        /*$('#table').on('column-switch.bs.table', function (e, field, checked) {
-            if (['species', 'antibiotic', 'ds_n_examples'].indexOf(field) >= 0) {
-                header = $('.th-dataset');
-                if (checked){
-                    th_dataset_colspan += 1;
-                    header.prop('colspan', th_dataset_colspan);
+        var display_model = function (model_data){
+            // Generate the HMTL for each rule
+            rule_html = []
+            $.each(model_data.rules, function (idx, rule){
+                rule_importance = model_data.rule_importances[idx];
+                rule_annotation = model_data.rule_annotations[idx];
+                if ('product' in rule_annotation){
+                    rule_annotation = 'Product: ' + rule_annotation.product + '<br /><br />PATRIC ID: ' + rule_annotation.patric_id;
+                } else {
+                    rule_annotation = 'No annotation found';
                 }
-                else{
-                    th_dataset_colspan -= 1;
-                    header.prop('colspan', th_dataset_colspan);
-                }
-            }
-            else if (['risk', 'sensitivity', 'specificity', 'f1_score', 'n_rules'].indexOf(field) >= 0) {
-               header = $('.th-metrics');
-                if (checked){
-                    th_metrics_colspan += 1;
-                    header.prop('colspan', th_metrics_colspan);
-                }
-                else{
-                    th_metrics_colspan -= 1;
-                    header.prop('colspan', th_metrics_colspan);
-                }
-            }
-            else{
-               header = $('.th-details');
-               if (checked){
-                    th_details_colspan += 1;
-                    header.prop('colspan', th_details_colspan);
-                }
-                else{
-                    th_details_colspan -= 1;
-                    header.prop('colspan', th_details_colspan);
-                }
-            }
+                rule_annotation += '<br /><br />(Rule importance: ' + rule_importance + ')';
+                rule_html.push('<div class="row"><div class="col-sm-12 text-center"><h3><span class="label label-success" style="font-weight:normal; font-family: monospace; color:black; background-color:lightgreen" data-toggle="tooltip" data-html="true" tabindex="0" title="' + rule_annotation + '">' + rule + '</span></h3></div></div>');
+            });
 
-            if (th_dataset_colspan == 0){
-                header.hide();
+            // Generate the HTML for the rule separator
+            if(model_data["type"] == "conjunction"){
+                separator_text = "AND";
+            } else {
+                separator_text = "OR";
             }
-            else{
-                header.show();
-            }
-            if (th_metrics_colspan == 0){
-                header.hide();
-            }
-            else{
-                header.show();
-            }
-            if (th_details_colspan == 0){
-                header.hide();
-            }
-            else{
-                header.show();
-            }
+            separator_html = '<div class="row"><div class="col-sm-12 text-center"><h3><span class="label label-default" style="font-weight:normal; font-family: monospace; color:black; background-color:lightgray">' + separator_text + '</span></h3></div></div>';
 
+            // Draw the model
+            $("#model_body").html($("#model_body").html() + rule_html.join(separator_html));
 
-        });*/
+            initialize_tooltips();
+        }
+
+        $(document).ready(function(){
+            // Show dataset informations
+            ds_info = get_dataset_info();
+            $("#species_name_1").text(ds_info["species"].split(" ")[0]);
+            $("#species_name_2").text(ds_info["species"].split(" ")[1]);
+            $("#antibiotic_name").html(
+                ds_info["antibiotic"] +
+                "&nbsp;<a target='_blank' href='http://www.drugbank.ca/unearth/q\?query\=" + ds_info["antibiotic"] +
+                "\&searcher\=drugs\&approved\=1\&vet_approved\=1\&nutraceutical\=1\&illicit\=1\&withdrawn\=1\&investigational\=1\&experimental\=1\'>" +
+                "<span class='glyphicon glyphicon-question-sign'></span></a>"
+            );
+
+            // Get the model information and display it on the page
+            $.getJSON('./results/datasets/' + ds_info["name"] + '/model.json', display_model);
+
+            // Set the URL to download the fasta version of the model
+            $("#model_fasta").prop("href", "./results/datasets/" + ds_info["name"] + "/" + ds_info["name"] +".fasta");
+
+            initialize_tooltips();
+        });
+
+        $(document).load(function(){
+
+        });
     </script>
 
+    <script>
+        // Load the overview table
+        $('#table_overview').bootstrapTable({
+            url: './results/datasets/' + getUrlParameter("ds") + '/overview.json'
+        });
+
+        // Load the repeats table
+        $('#table_repeats').bootstrapTable({
+            url: './results/datasets/' + getUrlParameter("ds") + '/repeats.json'
+        });
+    </script>
 </body>
 
 </html>
