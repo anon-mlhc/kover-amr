@@ -292,7 +292,7 @@
                 if ('product' in rule_annotation){
                     rule_annotation = 'Product: ' + rule_annotation.product + '<br /><br />PATRIC ID: ' + rule_annotation.patric_id;
                 } else {
-                    rule_annotation = 'No annotation available';
+                    rule_annotation = 'No annotation found';
                 }
                 rule_annotation += '<br /><br />(Rule importance: ' + rule_importance + ')';
                 rule_html.push('<div class="row"><div class="col-sm-12 text-center"><h3><span class="label label-success" style="font-weight:normal; font-family: monospace; color:black; background-color:lightgreen" data-toggle="tooltip" data-html="true" tabindex="0" title="' + rule_annotation + '">' + rule + '</span></h3></div></div>');
