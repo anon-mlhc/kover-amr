@@ -323,6 +323,15 @@
                 window.location.href = "./details.html?ds=" + ds_full_name_by_species[species][pointNumber];
             });
 
+            // Bind to hover events
+            $("#plots").on('plotly_hover', function(e, data){
+                n_species = Object.keys(ds_full_name_by_species).length;
+                pointNumber = data.points[0].pointNumber;
+                curveNumber = data.points[0].curveNumber;
+                Plotly.Fx.hover('plots',[{curveNumber: curveNumber % n_species, pointNumber: pointNumber},
+                                         {curveNumber: n_species + curveNumber % n_species, pointNumber: pointNumber}],
+                                         ["xy", "x2y2"]);
+            });
         }
 
         $(document).ready(function(){
