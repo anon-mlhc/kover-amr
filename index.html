@@ -223,6 +223,8 @@
             sensitivities_by_species = {};
             specificities_by_species = {};
             color_by_species = {};
+            max_n_kmers = -1;
+            max_n_examples = -1;
             $.each(summary, function(idx, ds){
                 ds_full_name_by_species[ds.species] = [];
                 antibiotics_by_species[ds.species] = [];
@@ -233,6 +235,12 @@
                 color_by_species[ds.species] = -1;
             });
             $.each(summary, function(idx, ds){
+                if(ds.ds_n_examples > max_n_examples){
+                    max_n_examples = ds.ds_n_examples;
+                }
+                if(ds.ds_n_kmers > max_n_kmers){
+                    max_n_kmers = ds.ds_n_kmers;
+                }
                 ds_full_name_by_species[ds.species].push(ds.ds_full_name);
                 antibiotics_by_species[ds.species].push(ds.antibiotic);
                 n_examples_by_species[ds.species].push(ds.ds_n_examples);
@@ -286,13 +294,13 @@
             var layout = {
                 xaxis1: {
                     title: "Genomes",
-                    range: [0.0, 6000],
+                    range: [0.0, max_n_examples * 1.05],
                     domain: [0, 0.45],
                     anchor: 'y1'
                 },
                 yaxis1: {
                     title: "k-mers",
-                    range: [0.0, 50000000],
+                    range: [0.0, max_n_kmers * 1.05],
                     anchor: 'x1'
                 },
                 xaxis2: {
