@@ -1,1 +1,1 @@
-{"rules": ["Presence(ACGCTTTTGCCTATGTTTCGTTCAACAGGGA)"], "rule_annotations": [{}], "type": "conjunction", "n_rules": 1, "rule_importances": [1.0]}
+{"rules": ["Presence(ACGCTTTTGCCTATGTTTCGTTCAACAGGGA)"], "rule_annotations": [{"product": "", "end": 27482, "accession": "CP009100", "start": 27452, "gene": "", "strand": -1}], "type": "conjunction", "n_rules": 1, "rule_importances": [1.0]}

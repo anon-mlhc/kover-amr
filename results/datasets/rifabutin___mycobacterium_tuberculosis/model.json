@@ -1,1 +1,1 @@
-{"rules": ["Absence(CCGACAGTCGGCGCTTGTGGGTCAACCCCGA)"], "rule_annotations": [{}], "type": "conjunction", "n_rules": 1, "rule_importances": [1.0]}
+{"rules": ["Absence(CCGACAGTCGGCGCTTGTGGGTCAACCCCGA)"], "rule_annotations": [{"product": "DNA-directed RNA polymerase subunit beta", "end": 761179, "accession": "CP009100", "start": 761149, "gene": "", "strand": -1}], "type": "conjunction", "n_rules": 1, "rule_importances": [1.0]}
