@@ -125,7 +125,7 @@
                             <a href="#0" data-toggle="collapse" data-target="#collapse-model-body">Model</a>&nbsp;
                             <!-- <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?FORMAT_OBJECT=Alignment&FORMAT_TYPE=HTML&GET_SEQUENCE=on&NCBI_GI=on&NEW_FORMATTER=on&PROGRAM=blastn&QUERY=>rule1%20presence%0AAAAAGCGACAATTTTTCCATCTGGCTGCTCA&ENTREZ_QUERY=Acinetobacter%20baumannii&5Borgn%5D&DATABASE=nt&SHOW_LINKOUT=on&CMD=Web" target="_blank" class="label label-warning">blastn</a>&nbsp; -->
                             <a href="#" id="model_fasta" class="label label-danger">fasta</a>
-                            <small>(click rules for annotations)</small>
+                            <small>(click rules for detailed annotations)</small>
                         </h4>
                     </div>
                     <div id="collapse-model-body" class="panel-collapse collapse in">
@@ -197,7 +197,6 @@
     </div>
 
     <footer class="footer">
-
     </footer>
 
     <!-- jQuery Version 1.11.1 -->
@@ -258,20 +257,25 @@
             // Generate the HMTL for each rule
             rule_html = []
             $.each(model_data.rules, function (idx, rule){
+
+                // Load the rule's annotations
                 rule_importance = model_data.rule_importances[idx].toString().slice(0, 5);
                 rule_annotation = model_data.rule_annotations[idx];
-                gene = ((rule_annotation.gene == "")? "NA" : rule_annotation.gene);
-                product = ((rule_annotation.product == "")? "NA" : rule_annotation.product);
-                genbank_url = "https://www.ncbi.nlm.nih.gov/nucleotide/" + rule_annotation.accession + "?from=" +
-                              rule_annotation.start + "&to=" + rule_annotation.end;
-                if ('product' in rule_annotation){
-                    rule_annotation = 'Gene: ' + gene + '<br /><br />Product: ' + product;
+
+                // Parse the k-mer annotation
+                if (rule_annotation.accession != ""){
+                    genbank_url = "https://www.ncbi.nlm.nih.gov/nucleotide/" + rule_annotation.accession + "?from=" + rule_annotation.start + "&to=" + rule_annotation.end;
+                    gene = ((rule_annotation.gene == "")? "-" : rule_annotation.gene);
+                    product = ((rule_annotation.product == "")? "-" : rule_annotation.product);
+                    rule_annotation = 'Gene: ' + gene + '<br /><br />Product: ' + product + '<br /><br />Hit accession: ' + rule_annotation.accession;
                 } else {
+                    genbank_url = "#";
                     rule_annotation = 'No annotation found';
                 }
+
+                // Display the annotations
                 rule_annotation += '<br /><br />(Rule importance: ' + rule_importance + ')';
-                //rule_html.push('<div class="row"><div class="col-sm-12 text-center"><h3><a href="' + genbank_url + '"><span class="label label-success" style="font-weight:normal; font-family: monospace; color:black; background-color:lightgreen" data-toggle="tooltip" data-html="true" tabindex="0" title="' + rule_annotation + '">' + rule + '</span></a></h3></div></div>');
-                rule_html.push('<div class="row"><div class="col-sm-12 text-center"><h3><span class="label label-success" style="font-weight:normal; font-family: monospace; color:black; background-color:lightgreen" data-toggle="tooltip" data-html="true" tabindex="0" title="' + rule_annotation + '">' + rule + '</span></h3></div></div>');
+                rule_html.push('<div class="row"><div class="col-sm-12 text-center"><h3><a href="' + genbank_url + '" target="' + ((genbank_url == '#') ? '' : '_blank') + '" style="text-decoration: none"><span class="label label-success" style="font-weight:normal; font-family: monospace; color:black; background-color:lightgreen" data-toggle="tooltip" data-html="true" tabindex="0" title="' + rule_annotation + '">' + rule + '</span></a></h3></div></div>');
             });
 
             // Generate the HTML for the rule separator
